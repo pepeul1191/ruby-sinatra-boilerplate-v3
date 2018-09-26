@@ -12,34 +12,40 @@ module Sinatra
           end
           #handlers
           index = lambda do
+            mensaje_tipo = 'mensaje-error'
             locals = {
               :constants => CONSTANTS,
               :csss => login_css(),
               :jss => login_js(),
               :title => 'Bienvenido',
-              :mensaje => ''
+              :mensaje => '',
+              :mensaje_tipo => mensaje_tipo
             }
         		erb :'login/index', :layout => :'layouts/blank', :locals => locals
           end
 
           forgot_password = lambda do
+            mensaje_tipo = 'mensaje-error'
             locals = {
               :constants => CONSTANTS,
               :csss => login_css(),
               :jss => login_js(),
               :title => 'Recuperar Contraseña',
-              :mensaje => ''
+              :mensaje => '',
+              :mensaje_tipo => mensaje_tipo
             }
         		erb :'login/forgot_password', :layout => :'layouts/blank', :locals => locals
           end
 
           sign_in = lambda do
+            mensaje_tipo = 'mensaje-error'
             locals = {
               :constants => CONSTANTS,
               :csss => login_css(),
               :jss => login_js(),
               :title => 'Crear cuenta',
-              :mensaje => ''
+              :mensaje => '',
+              :mensaje_tipo => mensaje_tipo,
             }
         		erb :'login/sign_in', :layout => :'layouts/blank', :locals => locals
           end
@@ -67,6 +73,7 @@ module Sinatra
 
           access = lambda do
             mensaje = ''
+            mensaje_tipo = 'mensaje-error'
             continuar = true
             csrf_key = CONSTANTS[:csrf][:key]
             csrf_val = CONSTANTS[:csrf][:secret]
@@ -103,10 +110,53 @@ module Sinatra
                 :csss => login_css(),
                 :jss => login_js(),
                 :title => 'Bienvenido',
-                :mensaje => mensaje
+                :mensaje => mensaje,
+                :mensaje_tipo => mensaje_tipo,
               }
           		erb :'login/index', :layout => :'layouts/blank', :locals => locals
             end
+          end
+
+          send_password = lambda do
+            mensaje = ''
+            mensaje_tipo = 'mensaje-error'
+            continuar = true
+            csrf_key = CONSTANTS[:csrf][:key]
+            csrf_val = CONSTANTS[:csrf][:secret]
+            csrf_req = params[csrf_key]
+            if csrf_req == '' then
+              mensaje = 'Token CSRF no existe en POST request'
+              continuar = false
+            else
+              # validar csrf token
+              if csrf_req != csrf_val then
+                mensaje = 'Token CSRF no coincide en POST request'
+                continuar = false
+              end
+              # validar usuario y contraseña si csrf token es correcto
+              if continuar == true then
+                email = params['email']
+                contrasenia = params['password']
+                user_email = Models::User.select(:email).where(:email => email).first()
+                if user_email == nil then
+                  mensaje = 'Correo electrónico no registrado'
+                  continuar = false
+                else
+                  #enviar correo
+                  mensaje = 'Contraseña enviada'
+                  mensaje_tipo = 'mensaje-success'
+                end
+              end
+            end
+            locals = {
+              :constants => CONSTANTS,
+              :csss => login_css(),
+              :jss => login_js(),
+              :title => 'Recuperar Contraseña',
+              :mensaje => mensaje,
+              :mensaje_tipo => mensaje_tipo,
+            }
+            erb :'login/forgot_password', :layout => :'layouts/blank', :locals => locals
           end
 
           cerrar = lambda do
@@ -121,7 +171,7 @@ module Sinatra
           app.get  '/login/cerrar', &cerrar
           app.post '/login/access', &access
           #app.post '/login/create_account', &create_account
-          #app.post '/login/send_password', &send_password
+          app.post '/login/send_password', &send_password
         end
       end
     end

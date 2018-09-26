@@ -5,3 +5,15 @@
 input[type="text"], input[type="email"], input[type="password"], button {
   border-radius: 0px;
 }
+
+.mensaje-error{
+  color: #cd3333; 
+}
+
+.mensaje-success{
+  color: #228B22; 
+}
+
+.text-center{
+  text-align: center;
+}
