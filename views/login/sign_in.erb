@@ -1,0 +1,15 @@
+<form class="login" action="<%=constants[:base_url]%>login/create_account" method="post">
+  <h1 class="login-title">Crear Cuenta</h1>
+  <input type="text" class="login-input" placeholder="nombre completo" autofocus name="name">
+  <input type="email" class="login-input" placeholder="correo electrónico" autofocus name="email">
+  <input type="text" class="login-input" placeholder="usuario" autofocus name="user">
+  <input type="password" class="login-input" placeholder="contraseña" name="password" style="margin-bottom:0px;">
+  <input type="hidden" name="<%=constants[:csrf][:key]%>" value="<%=constants[:csrf][:secret]%>"/>
+  <p class="mensaje-error"><%=mensaje%></p>
+  <button type="submit" value="Submit" class="login-button">Crear</button>
+  <p class="login-sign"><a href="<%=constants[:base_url]%>login/forgot_password">Olvidó su contraseña?</a></p>
+  <p class="login-lost"><a href="<%=constants[:base_url]%>login">Ingresar</a></p>
+</form>
+<footer>
+  <p>Powered by: <a href="http://softweb.pe/">Software Web Perú</a> © 2011-2018 </p>
+</footer>

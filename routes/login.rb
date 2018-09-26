@@ -22,6 +22,28 @@ module Sinatra
         		erb :'login/index', :layout => :'layouts/blank', :locals => locals
           end
 
+          forgot_password = lambda do
+            locals = {
+              :constants => CONSTANTS,
+              :csss => login_css(),
+              :jss => login_js(),
+              :title => 'Recuperar Contraseña',
+              :mensaje => ''
+            }
+        		erb :'login/forgot_password', :layout => :'layouts/blank', :locals => locals
+          end
+
+          sign_in = lambda do
+            locals = {
+              :constants => CONSTANTS,
+              :csss => login_css(),
+              :jss => login_js(),
+              :title => 'Crear cuenta',
+              :mensaje => ''
+            }
+        		erb :'login/sign_in', :layout => :'layouts/blank', :locals => locals
+          end
+
           ver = lambda do
             rpta = ''
             status = 200
@@ -91,6 +113,8 @@ module Sinatra
           end
           #routes
           app.get  '/login', &index
+          app.get  '/login/forgot_password', &forgot_password
+          app.get  '/login/sign_in', &sign_in
           app.post '/login/acceder', &acceder
           app.get  '/login/ver', &ver
           app.get  '/login/cerrar', &cerrar
