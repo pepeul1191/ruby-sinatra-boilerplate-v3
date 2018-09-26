@@ -1,5 +1,5 @@
 html { height: 40%; width: 100%; }
-body { color: #777777; font-family: Verdana, sans-serif; font-size: 11px; var(--background-primary-color); display: table; height: 60%; margin: 0; padding: 0; width: 100%; }
+body { color: #777777;   font-family: Arial, Helvetica, sans-serif; font-size: 11px; var(--background-primary-color); display: table; height: 60%; margin: 0; padding: 0; width: 100%; }
 h1 { font-size: 100px; margin-top: 15%; margin-bottom: 20px;}
 h2 { font-size: 20px;}
 p { font-size: 13px;}
@@ -13,3 +13,4 @@ a > i { margin-right: 5px; font-size: 1.25em !important; }
 .row:nth-child(2) { color: #999; padding-top: 20px; }
 .bottom-align-text{ position: absolute; bottom: 0; right: 0; }
 .error-divider{ padding-top: 25px; }
+.text-center{text-align: center}

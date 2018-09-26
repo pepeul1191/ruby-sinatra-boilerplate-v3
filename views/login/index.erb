@@ -1,22 +1,12 @@
-<div class="login-page">
-  <div class="form">
-    <i class="fa fa-universal-access" aria-hidden="true" id="logo-brand"></i>
-    <form class="login-form" action="<%=constants[:base_url]%>login/acceder" method="post">
-      <input type="text" name="usuario" placeholder="usuario"/>
-      <input type="password" name="contrasenia" placeholder="contrasenia"/>
-      <input type="hidden" name="<%=constants[:csrf][:key]%>" value="<%=constants[:csrf][:secret]%>"/>
-      <button>login</button>
-      <p class="mensaje-error"><%=mensaje%></p>
-      <p class="message">No está registrado? <a href="#" onclick="crearCuenta()">Crear cuenta</a></p>
-    </form>
-  </div>
-</div>
+<form class="login" action="<%=constants[:base_url]%>login/acceder" method="post">
+  <h1 class="login-title">Ingresar al Sistema</h1>
+  <input type="text" class="login-input" placeholder="usuario" autofocus name="user">
+  <input type="password" class="login-input" placeholder="contraseña" name="password" style="margin-bottom:0px;">
+  <input type="hidden" name="<%=constants[:csrf][:key]%>" value="<%=constants[:csrf][:secret]%>"/>
+  <p class="mensaje-error"><%=mensaje%></p>
+  <button type="submit" value="Submit" class="login-button">Ingresar</button>
+  <p class="login-lost"><a href="<%=constants[:base_url]%>login/forgot_password">Olvidó su contraseña?</a></p>
+</form>
 <footer>
-<p>Powered by: <a href="http://softweb.pe/">Software Web Perú</a> © 2011-2018 </p>
+  <p>Powered by: <a href="http://softweb.pe/">Software Web Perú</a> © 2011-2018 </p>
 </footer>
-
-<script type="text/javascript">
-  function crearCuenta() {
-    alert("Operación no disponible");
-  }
-</script>

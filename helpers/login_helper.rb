@@ -6,11 +6,7 @@ module Sinatra
           rpta = nil
           if CONSTANTS[:ambiente] == 'desarrollo'
             rpta = [
-              'bower_components/bootstrap/dist/css/bootstrap.min',
-              'bower_components/font-awesome/css/font-awesome.min',
-              'bower_components/swp-backbone/assets/css/constants',
-              'bower_components/swp-backbone/assets/css/login',
-              'assets/css/constants',
+              'assets/css/styles',
               'assets/css/login',
             ]
           else
