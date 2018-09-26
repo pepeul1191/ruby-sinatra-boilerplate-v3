@@ -137,12 +137,12 @@ module Sinatra
               if continuar == true then
                 email = params['email']
                 contrasenia = params['password']
-                user_email = Models::User.select(:email).where(:email => email).first()
-                if user_email == nil then
+                user = Models::User.where(:email => email).first()
+                if user == nil then
                   mensaje = 'Correo electrónico no registrado'
                   continuar = false
                 else
-                  #enviar correo
+                  mail_send_password(user)
                   mensaje = 'Contraseña enviada'
                   mensaje_tipo = 'mensaje-success'
                 end

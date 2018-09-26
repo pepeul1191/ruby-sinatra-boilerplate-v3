@@ -14,6 +14,7 @@ class App < Sinatra::Base
   #registro de helpers de la aplicacion
   helpers Sinatra::App::Helpers::Applicaction
   helpers Sinatra::App::Helpers::Filters
+  helpers Sinatra::App::Helpers::Mail
   #registro de helpers de routes
   helpers Sinatra::App::Helpers::LoginHelper
   helpers Sinatra::App::Helpers::ErrorHelper
