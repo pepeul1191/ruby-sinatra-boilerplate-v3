@@ -20,7 +20,7 @@ module Sinatra
 
         def check_session_false
           if session[:activo] == true then
-            halt redirect '/accesos/'
+            halt redirect '/'
           end
         end
 

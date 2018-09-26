@@ -65,7 +65,7 @@ module Sinatra
             rpta
           end
 
-          acceder = lambda do
+          access = lambda do
             mensaje = ''
             continuar = true
             csrf_key = CONSTANTS[:csrf][:key]
@@ -82,9 +82,10 @@ module Sinatra
               end
               # validar usuario y contraseña si csrf token es correcto
               if continuar == true then
-                usuario = params['usuario']
-                contrasenia = params['contrasenia']
-                if usuario != CONSTANTS[:login][:usuario] or contrasenia != CONSTANTS[:login][:contrasenia] then
+                usuario = params['user']
+                contrasenia = params['password']
+                user = Models::User.where(:user => usuario, :password => contrasenia).first()
+                if user == nil then
                   mensaje = 'Usuario y/o contraenia no coinciden'
                   continuar = false
                 end
@@ -94,7 +95,8 @@ module Sinatra
               session[:activo] = true
               session[:momento] = Time.now
               session[:usuario] = usuario
-              redirect '/accesos/'
+              session[:user_id] = user.id
+              redirect '/'
             else
               locals = {
                 :constants => CONSTANTS,
@@ -115,9 +117,11 @@ module Sinatra
           app.get  '/login', &index
           app.get  '/login/forgot_password', &forgot_password
           app.get  '/login/sign_in', &sign_in
-          app.post '/login/acceder', &acceder
           app.get  '/login/ver', &ver
           app.get  '/login/cerrar', &cerrar
+          app.post '/login/access', &access
+          #app.post '/login/create_account', &create_account
+          #app.post '/login/send_password', &send_password
         end
       end
     end
