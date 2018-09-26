@@ -8,6 +8,7 @@ body {
   padding: 30px 25px;
   background: white;
   border: 1px solid #c4c4c4;
+  padding-bottom: 50px;
 }
 
 h1.login-title {
@@ -50,11 +51,20 @@ h1.login-title {
 }
 
 .login-lost{
-  text-align:center;
+  text-align:left;
   margin-bottom:0px;
+  position: relative;
+  float: left;
 }
 
-.login-lost a{
+.login-sign{
+  text-align:right;
+  margin-bottom:10px;
+  position: relative;
+  float: right;
+}
+
+.login-lost a, .login-sign a {
   color:#666;
   text-decoration:none;
   font-size:13px;
