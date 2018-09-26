@@ -6,18 +6,18 @@ Instalar dependencias:
 
 Ejecutar aplicación:
 
-    $ rackup
+    $ puma
 
 Ejecutar aplicación hot-reaload:
 
-    $ rerun rackup
+    $ rerun puma --ignore "public/*"
 
 ### Mmigraciones
 
-Migraciones con DBMATE - ubicaciones:
+Migraciones con DBMATE - access:
 
-    $ dbmate -d "ubicaciones/migrations" -e "DATABASE_UBICACIONES" new <<nombre_de_migracion>>
-    $ dbmate -d "ubicaciones/migrations" -e "DATABASE_UBICACIONES" up
+    $ dbmate -d "db/migrations" -e "DATABASE_URL" new <<nombre_de_migracion>>
+    $ dbmate -d "db/migrations" -e "DATABASE_URL" up
 
 ---
 
