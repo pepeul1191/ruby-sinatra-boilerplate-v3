@@ -12,6 +12,10 @@ Ejecutar aplicación hot-reaload:
 
     $ rerun puma --ignore "public/*"
 
+Ejecutar aplicación con websockets:
+
+    $ thin -p 3000 start
+
 ### Mmigraciones
 
 Migraciones con DBMATE - access:
@@ -25,3 +29,4 @@ Fuentes:
 
 + https://blog.carbonfive.com/2013/06/24/sinatra-best-practices-part-one/
 + https://stackoverflow.com/questions/735073/best-way-to-require-all-files-from-a-directory-in-ruby
++ https://github.com/gruis/sinatra-websocket

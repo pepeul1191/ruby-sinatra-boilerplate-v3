@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra-websocket'
 
 class App < Sinatra::Base
   #configuraciones
@@ -6,6 +7,8 @@ class App < Sinatra::Base
   set :session_secret, 'super secret'
   set :public_folder, File.dirname(__FILE__) + '/public'
   set :layout, 'views/layouts'
+  set :sockets, []
+
   enable :sessions
   #before all requests
   before do
@@ -22,4 +25,6 @@ class App < Sinatra::Base
   register Sinatra::App::Routing::Home
   register Sinatra::App::Routing::Error
   register Sinatra::App::Routing::Login
+  #registro de websockets
+  register Sinatra::App::Socket::Demo
 end
